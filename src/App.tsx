@@ -35,18 +35,18 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
       <div className="ms-Grid-row">
         <div className="ms-Grid-col ms-sm4">
           <Dropdown
-          label="Bereich auswählen"
-          ariaLabel="Bereich auswählen"
+          label={appMeldsettings.translations.active.area_label}
+          ariaLabel={appMeldsettings.translations.active.area_label}
           onChange={this.areaChange}        
-          placeholder="Wähle einen Bereich"
+          placeholder={appMeldsettings.translations.active.area_placeholder}
           options={appMeldsettings.areaOptions}
           />        
         </div>
         <div className="ms-Grid-col ms-sm4">
           <Dropdown
-          label="Projekt auswählen"
-          ariaLabel="Projekt auswählen"
-          placeholder="Wähle ein Projekt"
+          label={appMeldsettings.translations.active.project_label}
+          ariaLabel={appMeldsettings.translations.active.project_label}
+          placeholder={appMeldsettings.translations.active.project_placeholder}
           onChange={this.projectChange}
           disabled={(this.checkArea()) ? false : true}
           options={appMeldsettings.projectOptions}
@@ -54,7 +54,7 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
         </div>
         <div className="ms-Grid-col ms-sm4 app-meld-button-wrapper">
           <PrimaryButton 
-            text="Los"
+            text={appMeldsettings.translations.active.go_button}
             disabled={buttonActive}
             onClick={this.jumpToDestination}
           />        
@@ -68,17 +68,17 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
  
 
   private jumpToDestination = (): void => {
-    let hrefToJump = "https://www.example.com";
+    let hrefToJump = "/websites/meld/DokumenteProd/Forms/AllItems.aspx";    
     const selectedArea = this.state.selectedArea.key;
     const selectedProject = this.state.selectedProject.key;
-    const spRootFolderInfo = "RootFolder=";    
+    const spRootFolderInfo = "?RootFolder=%2Fwebsites%2Fmeld%2FDokumenteProd%2F";    
 
     if(this.checkArea()){
       hrefToJump = selectedProject+spRootFolderInfo+selectedArea;
     }
 
-    console.log(hrefToJump);
-    // window.location.href = hrefToJump;
+    // console.log(hrefToJump);
+    window.location.href = hrefToJump;
   }
 
   private checkArea = (): boolean => {
