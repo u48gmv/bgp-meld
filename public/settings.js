@@ -1,5 +1,8 @@
 /* tslint:disable */
 appMeldsettings = {};
+appMeldsettings.allItemsForm = "/websites/meld/DokumenteProd/Forms/AllItems.aspx";
+appMeldsettings.rootFolder = "?RootFolder=%2Fwebsites%2Fmeld%2FDokumenteProd%2F";
+
 appMeldsettings.areaOptions = [
     {"key":"ALL", "text":"Alle"},        
     {"key":"ZEN", "text":"GDA ZEN"},
@@ -27,14 +30,16 @@ appMeldsettings.translations = {
     "project_label": "Choose a project",
     "project_placeholder":"Choose a project",
     "area_label":"Choose an area",
-    "area_placeholder":"Choose an area"
+    "area_placeholder":"Choose an area",
+    "spinner_label":"GDA Daten werden geladen..."
   },
   "active":{
     "go_button":"Los",
     "project_label": "Wähle ein Projekt",
     "project_placeholder":"Klick um ein Projekt zu wählen",
     "area_label":"Wähle einen Bereich",
-    "area_placeholder":"Klick um einen einen Bereich zu wählen"
+    "area_placeholder":"Klick um einen einen Bereich zu wählen",
+    "spinner_label":"GDA Daten werden geladen..."
   }
 }
 

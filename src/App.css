@@ -1,3 +1,11 @@
 .app-meld-button-wrapper{
   padding: 28px;
 }
+
+.app-meld-hidden{
+  display:none;
+}
+
+.app-meld-show{
+  display:block;
+}

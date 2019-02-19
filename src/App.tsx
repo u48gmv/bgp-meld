@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {PrimaryButton} from 'office-ui-fabric-react/lib/Button';
 import {Dropdown, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
-
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
 import './App.css';
 
 declare var appMeldsettings: any;
 
 
-class App extends React.Component<{},{selectedArea:{key:string|number},selectedProject:{key:string|number}}> {
+class App extends React.Component<{},{selectedArea:{key:string|number},selectedProject:{key:string|number},showSpinner:boolean}> {
   
  
   constructor(props: {}){
     super(props);
     this.state = {
       selectedArea: {key:''},
-      selectedProject: {key:''}
+      selectedProject: {key:''},
+      showSpinner: false
     };
   }
 
@@ -29,6 +30,8 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
 
   public render() {
     const buttonActive = this.checkJumpButton();
+    const spinnerClass = (this.state.showSpinner) ? "app-meld-show" : "app-meld-hidden";
+    const spinnerRowClass = "ms-Grid-col ms-sm12 "+spinnerClass;
 
     return (
       <div className="ms-Grid" dir="ltr">
@@ -60,6 +63,11 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
           />        
         </div>                
       </div>
+      <div className="ms-Grid-row">
+        <div className={spinnerRowClass} >          
+          <Spinner size={SpinnerSize.large} label={appMeldsettings.translations.active.spinner_label} ariaLive={appMeldsettings.translations.active.spinner_label} />
+        </div>
+      </div>
         </div>        
 
     );
@@ -68,16 +76,16 @@ class App extends React.Component<{},{selectedArea:{key:string|number},selectedP
  
 
   private jumpToDestination = (): void => {
-    let hrefToJump = "/websites/meld/DokumenteProd/Forms/AllItems.aspx";    
+    this.setState({showSpinner:true});
+    let hrefToJump = appMeldsettings.allItemsForm;    
     const selectedArea = this.state.selectedArea.key;
     const selectedProject = this.state.selectedProject.key;
-    const spRootFolderInfo = "?RootFolder=%2Fwebsites%2Fmeld%2FDokumenteProd%2F";    
+    const spRootFolderInfo = appMeldsettings.rootFolder;
 
     if(this.checkArea()){
       hrefToJump = selectedProject+spRootFolderInfo+selectedArea;
     }
 
-    // console.log(hrefToJump);
     window.location.href = hrefToJump;
   }
 
